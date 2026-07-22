@@ -1,0 +1,229 @@
+.section {
+  padding: 52px 0 40px;
+  background: var(--white);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 12px;
+}
+
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 12px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--blue-light) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover {
+  border-color: var(--blue-deep);
+  box-shadow: 0 10px 32px rgba(0, 27, 145, 0.16);
+  transform: translateY(-6px) scale(1.02);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:active {
+  transform: translateY(-2px) scale(1.00);
+}
+
+.imgWrap {
+  width: 72px;
+  height: 72px;
+  background: var(--blue-pale);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: background 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .imgWrap {
+  background: var(--blue-light);
+  transform: scale(1.1);
+}
+
+.imgWrap img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .imgWrap img {
+  transform: scale(1.12);
+}
+
+.name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 3px;
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+.card:hover .name {
+  color: var(--blue-deep);
+}
+
+.count {
+  font-size: 11px;
+  color: var(--gray-500);
+  margin-bottom: 8px;
+}
+
+.plus {
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--blue-deep);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-deep);
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .plus {
+  background: var(--blue-deep);
+  color: var(--white);
+  transform: rotate(90deg) scale(1.15);
+}
+
+/* ===== TRUST BAR ===== */
+.trustBar {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  background: var(--blue-pale);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 14px;
+  border-right: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+
+.trustItem:hover {
+  background: var(--blue-light);
+}
+
+.trustItem:last-child {
+  border-right: none;
+}
+
+.trustIcon {
+  width: 34px;
+  height: 34px;
+  background: var(--blue-light);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-deep);
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.trustItem:hover .trustIcon {
+  transform: scale(1.18) rotate(-6deg);
+}
+
+.trustText strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.trustText span {
+  font-size: 11px;
+  color: var(--gray-500);
+  line-height: 1.3;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .trustText span {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .trustBar {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .trustItem {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .trustItem:nth-child(3) {
+    border-right: none;
+  }
+
+  .trustItem:nth-child(4),
+  .trustItem:nth-child(5),
+  .trustItem:nth-child(6) {
+    border-bottom: none;
+  }
+
+  .trustText span {
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trustBar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

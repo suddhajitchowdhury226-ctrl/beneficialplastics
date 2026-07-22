@@ -1,0 +1,349 @@
+/* ===== HEADER SHELL ===== */
+.header {
+  background: var(--white);
+  border-bottom: 2px solid var(--blue-deep);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 27, 145, 0.10);
+}
+
+/* ===== TOP ROW ===== */
+.main {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 0;
+}
+
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.logoText {
+  line-height: 1.15;
+}
+
+.logoText strong {
+  display: block;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--blue-deep);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.logoText span {
+  display: block;
+  font-size: 11px;
+  color: var(--gray-500);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* SEARCH */
+.searchBox {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  max-width: 540px;
+  min-width: 0;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+
+.searchBox:focus-within {
+  border-color: var(--blue-deep);
+  box-shadow: 0 0 0 3px rgba(0, 27, 145, 0.08);
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-family: inherit;
+  background: transparent;
+  color: var(--black);
+  min-width: 0;
+}
+
+.searchInput::placeholder {
+  color: var(--gray-500);
+}
+
+.searchBtn {
+  background: var(--blue-deep);
+  color: var(--white);
+  border: none;
+  padding: 0 20px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+
+.searchBtn:hover {
+  background: var(--blue-hover);
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.phone {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--blue-deep);
+  white-space: nowrap;
+}
+
+.iconBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-deep);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+}
+
+.iconBtn:hover {
+  background: var(--blue-light);
+  border-color: var(--blue-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 27, 145, 0.15);
+}
+
+.iconBtn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.cartBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--blue-mid);
+  color: var(--white);
+  font-size: 9px;
+  font-weight: 800;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--white);
+}
+
+/* ===== NAVBAR ===== */
+.nav {
+  background: var(--blue-deep);
+}
+
+.navInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 13px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  position: relative;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: var(--white);
+  transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1), left 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navLink:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.navLink:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.navLink.active {
+  color: var(--white);
+  border-bottom-color: var(--white);
+}
+
+.navLink.active::after {
+  display: none;
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--blue-deep);
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: var(--shadow-lg);
+  min-width: 200px;
+  padding: 6px 0;
+  display: none;
+  z-index: 200;
+}
+
+.navItem:hover .dropdown {
+  display: block;
+}
+
+.dropdownLink {
+  display: block;
+  padding: 9px 16px;
+  font-size: 13px;
+  color: var(--gray-700);
+  transition: all var(--transition);
+}
+
+.dropdownLink:hover {
+  background: var(--blue-pale);
+  color: var(--blue-deep);
+  padding-left: 20px;
+}
+
+/* Quote btn */
+.quoteBtn {
+  background: var(--white);
+  color: var(--blue-deep);
+  padding: 9px 20px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  letter-spacing: 0.2px;
+  flex-shrink: 0;
+  border: 2px solid var(--white);
+}
+
+.quoteBtn:hover {
+  background: var(--blue-light);
+  color: var(--blue-deep);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.quoteBtn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Mobile */
+.menuBtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+}
+
+.menuBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .navLink {
+    padding: 13px 10px;
+    font-size: 12.5px;
+  }
+}
+
+@media (max-width: 900px) {
+  .navLinks {
+    display: none;
+  }
+
+  .menuBtn {
+    display: flex;
+  }
+
+  .quoteBtn {
+    display: none;
+  }
+
+  .searchBox {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 640px) {
+  .phone {
+    display: none;
+  }
+
+  .searchBox {
+    display: none;
+  }
+}

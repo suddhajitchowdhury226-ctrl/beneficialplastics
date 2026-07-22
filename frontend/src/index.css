@@ -1,0 +1,511 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* ===== BRAND PALETTE ===== */
+  --blue-deep: #001B91;
+  /* deep navy blue - primary dark */
+  --blue-mid: #0000FF;
+  /* pure blue - accents, links */
+  --blue-hover: #0015cc;
+  /* blue hover state */
+  --blue-light: #e8ecff;
+  /* very light blue bg */
+  --blue-pale: #f0f3ff;
+  /* page section bg */
+  --white: #ffffff;
+  --black: #0a0f2e;
+  /* near-black with blue tint for text */
+
+  /* neutrals */
+  --gray-700: #3d4466;
+  --gray-500: #7b82a8;
+  --gray-300: #ced3f0;
+  --gray-100: #f4f5fd;
+  --border: #dde1f5;
+
+  /* semantic */
+  --red: #e53e3e;
+  --yellow: #f6ad19;
+  --green-ok: #16a34a;
+
+  /* shadows - blue-tinted */
+  --shadow-sm: 0 1px 4px rgba(0, 27, 145, 0.08);
+  --shadow: 0 4px 20px rgba(0, 27, 145, 0.12);
+  --shadow-lg: 0 8px 40px rgba(0, 27, 145, 0.18);
+
+  --radius: 8px;
+  --radius-lg: 14px;
+  --transition: 0.18s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 24px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  transition: all var(--transition);
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  line-height: 1;
+}
+
+.btn-blue {
+  background: var(--blue-deep);
+  color: var(--white);
+}
+
+.btn-blue:hover {
+  background: var(--blue-hover);
+  box-shadow: 0 4px 16px rgba(0, 27, 145, 0.35);
+  transform: translateY(-1px);
+}
+
+/* keep green aliases pointing to blue for backward compat */
+.btn-green {
+  background: var(--blue-deep);
+  color: var(--white);
+}
+
+.btn-green:hover {
+  background: var(--blue-hover);
+  box-shadow: 0 4px 16px rgba(0, 27, 145, .3);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  border: 2px solid var(--white);
+  color: var(--white);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: var(--white);
+  color: var(--blue-deep);
+}
+
+.btn-outline-blue {
+  border: 2px solid var(--blue-deep);
+  color: var(--blue-deep);
+  background: transparent;
+}
+
+.btn-outline-blue:hover {
+  background: var(--blue-deep);
+  color: var(--white);
+}
+
+/* keep green alias */
+.btn-outline-green {
+  border: 2px solid var(--blue-deep);
+  color: var(--blue-deep);
+  background: transparent;
+}
+
+.btn-outline-green:hover {
+  background: var(--blue-deep);
+  color: var(--white);
+}
+
+.btn-sm {
+  padding: 7px 16px;
+  font-size: 13px;
+}
+
+/* ===== SECTION HELPERS ===== */
+.section-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: -0.3px;
+}
+
+.section-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue-deep);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.section-link:hover {
+  color: var(--blue-mid);
+  text-decoration: underline;
+}
+
+/* ===== STARS ===== */
+.star {
+  color: var(--yellow);
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+/* ===== BADGES ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
+
+.badge-red {
+  background: var(--red);
+  color: var(--white);
+}
+
+.badge-green {
+  background: var(--blue-deep);
+  color: var(--white);
+}
+
+.badge-blue {
+  background: var(--blue-deep);
+  color: var(--white);
+}
+
+/* ===== SKELETON ===== */
+.skeleton {
+  background: linear-gradient(90deg, var(--blue-pale) 25%, var(--blue-light) 50%, var(--blue-pale) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ===== SWIPER OVERRIDES ===== */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 34px !important;
+  height: 34px !important;
+  background: var(--white) !important;
+  border-radius: 50% !important;
+  box-shadow: var(--shadow) !important;
+  color: var(--blue-deep) !important;
+  top: 42% !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  color: var(--blue-deep) !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+}
+
+/* ======================================================
+   GLOBAL ANIMATION SYSTEM
+   ====================================================== */
+
+/* --- Keyframes --- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-36px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) rotate(-6deg);
+  }
+
+  70% {
+    transform: scale(1.06) rotate(1deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 27, 145, 0.25);
+  }
+
+  70% {
+    box-shadow: 0 0 0 12px rgba(0, 27, 145, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 27, 145, 0);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bar-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* --- Utility classes (apply via className) --- */
+.anim-fade-up {
+  opacity: 0;
+}
+
+.anim-fade-left {
+  opacity: 0;
+}
+
+.anim-fade-right {
+  opacity: 0;
+}
+
+.anim-scale-in {
+  opacity: 0;
+}
+
+.anim-fade-in {
+  opacity: 0;
+}
+
+.in-view.anim-fade-up {
+  animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.in-view.anim-fade-left {
+  animation: fadeLeft 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.in-view.anim-fade-right {
+  animation: fadeRight 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.in-view.anim-scale-in {
+  animation: scaleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.in-view.anim-fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+/* Stagger delays for child items */
+.delay-1 {
+  animation-delay: 0.08s !important;
+}
+
+.delay-2 {
+  animation-delay: 0.16s !important;
+}
+
+.delay-3 {
+  animation-delay: 0.24s !important;
+}
+
+.delay-4 {
+  animation-delay: 0.32s !important;
+}
+
+.delay-5 {
+  animation-delay: 0.40s !important;
+}
+
+.delay-6 {
+  animation-delay: 0.48s !important;
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .anim-fade-up,
+  .anim-fade-left,
+  .anim-fade-right,
+  .anim-scale-in,
+  .anim-fade-in {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}

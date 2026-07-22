@@ -1,0 +1,85 @@
+.page {
+  padding: 48px 0 80px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+}
+
+.infoItem {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 24px;
+  align-items: flex-start;
+}
+
+.infoIcon {
+  width: 40px;
+  height: 40px;
+  background: var(--green-bg);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green);
+  flex-shrink: 0;
+}
+
+.infoItem strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.infoItem p {
+  font-size: 13px;
+  color: var(--gray-700);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.field input,
+.field textarea {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color var(--transition);
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--green);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

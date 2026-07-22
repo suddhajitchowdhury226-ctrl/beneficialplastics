@@ -1,0 +1,63 @@
+.topbar {
+  background: var(--blue-deep);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(0, 0, 255, 0.4);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.left span,
+.right a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.left span:hover {
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+.left span svg,
+.right a svg {
+  opacity: 0.9;
+}
+
+.right a {
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.right a:hover {
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .right {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .left {
+    gap: 10px;
+    font-size: 11px;
+  }
+}
