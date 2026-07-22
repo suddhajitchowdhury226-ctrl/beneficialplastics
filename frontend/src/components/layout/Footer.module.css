@@ -1,6 +1,8 @@
 .footer {
   background: var(--blue-deep);
   color: rgba(255, 255, 255, 0.7);
+  border-radius: 20px 20px 0 0;
+  margin-top: 4px;
 }
 
 /* ===== NEWSLETTER ===== */

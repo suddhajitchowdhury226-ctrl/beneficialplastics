@@ -3,6 +3,8 @@
   padding: 64px 0 56px;
   position: relative;
   overflow: hidden;
+  border-radius: 20px;
+  margin: 12px 20px 0;
 }
 
 .hero::before {
@@ -269,6 +271,8 @@
 @media (max-width: 860px) {
   .hero {
     padding: 40px 0 36px;
+    margin: 8px 12px 0;
+    border-radius: 16px;
   }
 
   .inner {

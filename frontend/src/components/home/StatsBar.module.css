@@ -3,6 +3,8 @@
   padding: 40px 0;
   position: relative;
   overflow: hidden;
+  border-radius: 20px;
+  margin: 0 20px;
 }
 
 .bar::before {
@@ -71,6 +73,11 @@
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bar {
+    margin: 0 12px;
+    border-radius: 14px;
   }
 
   .item {
