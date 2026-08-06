@@ -26,7 +26,7 @@ export default function CategoryGrid() {
   const categories = data?.data?.length ? data.data : FALLBACK_CATEGORIES;
 
   return (
-    <section className={styles.section}>
+    <section id="products" className={styles.section}>
       <div className="container">
         <div className={styles.header}>
           <h2 className="section-title">Shop by Category</h2>

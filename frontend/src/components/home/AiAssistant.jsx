@@ -1,64 +1,61 @@
-import { Bot, MessageCircle, Wheat, Factory, Coffee, Beer, Zap, ShoppingBag } from 'lucide-react';
+import { Bot, MessageCircle, Wheat, Factory, Coffee, Beer, Wrench, ShoppingBag } from 'lucide-react';
 import styles from './AiAssistant.module.css';
 
 const INDUSTRIES = [
-  { icon: Wheat, label: 'Agriculture' },
-  { icon: Factory, label: 'Manufacturing' },
-  { icon: Coffee, label: 'Food Processing' },
-  { icon: Beer, label: 'Brewing' },
-  { icon: Zap, label: 'Industrial' },
-  { icon: ShoppingBag, label: 'Retail' },
+  { icon: Wheat,       label: 'Agriculture',        desc: 'Irrigation, fittings and tanks for farms.' },
+  { icon: Factory,     label: 'Manufacturing',       desc: 'Industrial components built to last.' },
+  { icon: Coffee,      label: 'Food Processing',     desc: 'Food-safe containers and fittings.' },
+  { icon: Beer,        label: 'Home Brewer',         desc: 'Taps, pourers and brewing equipment.' },
+  { icon: Wrench,      label: 'Plumbing',            desc: 'BSP fittings and adaptors.' },
+  { icon: ShoppingBag, label: 'Retail Business',     desc: 'Packaging and consumer goods supply.' },
 ];
 
 export default function AiAssistant() {
   return (
-    <section className={styles.section}>
+    <section id="industries" className={styles.section}>
       <div className="container">
+
+        <div className={styles.sectionHeader}>
+          <span className={styles.eyebrow}>INDUSTRIES WE SERVE</span>
+          <h2 className={styles.heading}>Trusted by Australian Businesses</h2>
+          <p className={styles.sub}>Our products are used across a wide range of Australian industries.</p>
+        </div>
+
         <div className={styles.grid}>
 
-          {/* AI CARD */}
+          {/* Industry cards */}
+          <div className={styles.industryGrid}>
+            {INDUSTRIES.map(({ icon: Icon, label, desc }) => (
+              <div key={label} className={styles.industryCard}>
+                <div className={styles.industryIcon}><Icon size={20} /></div>
+                <div>
+                  <div className={styles.industryName}>{label}</div>
+                  <div className={styles.industryDesc}>{desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* AI assistant card */}
           <div className={styles.aiCard}>
             <div className={styles.aiHeader}>
-              <div className={styles.botIconWrap}>
-                <Bot size={28} />
-              </div>
+              <div className={styles.botIconWrap}><Bot size={26} /></div>
               <div>
                 <h3 className={styles.aiTitle}>AI Product Assistant</h3>
                 <p className={styles.aiSub}>Powered by AI</p>
               </div>
             </div>
             <p className={styles.aiDesc}>
-              Not sure which product you need? Chat with our AI assistant to find the perfect product for your needs.
+              Not sure which product fits your needs? Our AI assistant helps you find the right product fast.
             </p>
-            {/* Chat preview */}
             <div className={styles.chatPreview}>
-              <div className={styles.chatBubbleLeft}>
-                Looking for the right BSP fitting?
-              </div>
-              <div className={styles.chatBubbleRight}>
-                I need one for a 44L drum.
-              </div>
-              <div className={styles.chatBubbleLeft}>
-                Here are the best compatible products for you.
-              </div>
+              <div className={styles.chatBubbleLeft}>Looking for the right BSP fitting?</div>
+              <div className={styles.chatBubbleRight}>I need one for a 44L drum.</div>
+              <div className={styles.chatBubbleLeft}>Here are the best compatible products for you.</div>
             </div>
             <button className={styles.chatBtn}>
-              <MessageCircle size={15} /> Chat Now
+              <MessageCircle size={14} /> Chat Now
             </button>
-          </div>
-
-          {/* INDUSTRIES CARD */}
-          <div className={styles.industriesCard}>
-            <h3 className={styles.industriesTitle}>Industries We Serve</h3>
-            <p className={styles.industriesDesc}>Our products are trusted across a wide range of industries.</p>
-            <div className={styles.industryGrid}>
-              {INDUSTRIES.map(({ icon: Icon, label }) => (
-                <div key={label} className={styles.industryItem}>
-                  <div className={styles.industryIcon}><Icon size={18} /></div>
-                  <div className={styles.industryName}>{label}</div>
-                </div>
-              ))}
-            </div>
           </div>
 
         </div>

@@ -50,6 +50,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Offset sticky header for anchor scroll targets */
+section[id],
+div[id] {
+  scroll-margin-top: 150px;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
