@@ -1,91 +1,184 @@
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Sparkles, Phone, User, ShoppingCart, Menu, ChevronDown, X } from 'lucide-react';
-import { useCategories } from '../../hooks/useCategories';
 import styles from './Header.module.css';
 
-const FALLBACK_CATEGORIES = [
-  { slug: 'bsp-fittings',       name: 'BSP Fittings' },
-  { slug: 'containers',         name: 'Containers' },
-  { slug: 'home-brew-products', name: 'Home Brew Products' },
-  { slug: 'pourers',            name: 'Pourers' },
-  { slug: 'taps',               name: 'Taps' },
-  { slug: 'special-products',   name: 'Special Products' },
+// ── NAV STRUCTURE ─────────────────────────────────────────────────────────────
+const NAV_ITEMS = [
+  {
+    label: 'Home',
+    path: '/',
+  },
+  {
+    label: 'About Us',
+    path: '/about',
+    children: [
+      { label: 'Team', path: '/about/team' },
+    ],
+  },
+  {
+    label: 'Services',
+    path: '/services',
+    children: [
+      { label: 'Tooling Services',          path: '/services/tooling' },
+      { label: 'Injection Moulding Services', path: '/services/injection-moulding' },
+      { label: '3D Printing',               path: '/services/3d-printing' },
+    ],
+  },
+  {
+    label: 'Containers',
+    path: '/products?category=containers',
+    children: [
+      { label: '54 Litre Industrial Bin Only',      path: '/products/54-litre-industrial-bin' },
+      { label: '44 Litre Industrial Bin & Lid',     path: '/products/44-litre-industrial-bin-lid' },
+      { label: 'Handy Case',                         path: '/products/handy-case' },
+    ],
+  },
+  {
+    label: 'BSP Fittings',
+    path: '/products?category=bsp-fittings',
+    children: [
+      { label: 'BSP Bung Cap',                          path: '/products/bsp-bung-cap' },
+      { label: 'BSP Adaptor Washer Set',                path: '/products/bsp-adaptor-washer-set' },
+      { label: 'BSP Adaptor',                           path: '/products/bsp-adaptor' },
+      { label: 'BSP Washer',                            path: '/products/bsp-washer' },
+      { label: 'Camlock Adaptor, Cap and Washer Set',   path: '/products/camlock-adaptor-cap-washer-set' },
+      { label: 'Camlock Adaptor',                       path: '/products/camlock-adaptor' },
+      { label: 'Camlock Bung Cap',                      path: '/products/camlock-bung-cap' },
+      { label: 'Camlock Washer',                        path: '/products/camlock-washer' },
+    ],
+  },
+  {
+    label: 'Home Brew Products',
+    path: '/products?category=home-brew-products',
+    children: [
+      { label: 'Bottle Draining Tree',          path: '/products/bottle-draining-tree' },
+      { label: 'Snap Tap - Standard',           path: '/products/snap-tap-standard' },
+      { label: 'Snap Tap - Female',             path: '/products/snap-tap-female' },
+      { label: 'Snap Tap - 44mm Long Thread',   path: '/products/snap-tap-44mm-long-thread' },
+      { label: 'Snap Tap - 3/4 BSP',            path: '/products/snap-tap-34-bsp' },
+      { label: 'Push Button Tap',               path: '/products/push-button-tap' },
+      { label: 'Snap Tap - Box',                path: '/products/snap-tap-box' },
+    ],
+  },
+  {
+    label: 'Taps',
+    path: '/products?category=taps',
+    children: [
+      { label: 'Snap Tap - Standard',           path: '/products/snap-tap-standard' },
+      { label: 'Snap Tap - Female',             path: '/products/snap-tap-female' },
+      { label: 'Snap Tap - 44mm Long Thread',   path: '/products/snap-tap-44mm-long-thread' },
+      { label: 'Snap Tap - 3/4 BSP',            path: '/products/snap-tap-34-bsp' },
+      { label: 'Push Button Tap',               path: '/products/push-button-tap' },
+      { label: 'Snap Tap - Box',                path: '/products/snap-tap-box' },
+      { label: 'Snap Tap Gold Plated',          path: '/products/snap-tap-gold-plated' },
+      { label: 'Snap Tap Chrome Plated',        path: '/products/snap-tap-chrome-plated' },
+      { label: '3/4" BSP Snap Tap (Header Card)', path: '/products/34-bsp-snap-tap-header-card' },
+    ],
+  },
+  {
+    label: 'Aussie Turbo Ripper',
+    path: '/products?category=aussie-turbo-ripper',
+    children: [
+      { label: 'Straight Shaft Whipper Snipper Head', path: '/products/straight-shaft-whipper-snipper' },
+      { label: 'Bent Shaft Whipper Snipper Head',     path: '/products/bent-shaft-whipper-snipper' },
+      { label: 'Metal (Aluminium) Whipper Snipper Head', path: '/products/metal-whipper-snipper' },
+      { label: 'Clip and Tube with 25 Star Cord',     path: '/products/clip-tube-25-star-cord' },
+      { label: 'Clip and Tube',                        path: '/products/clip-and-tube' },
+      { label: 'Star Cord (Trimming Cord) 1KG',        path: '/products/star-cord-1kg' },
+      { label: 'Star Cord (Trimming Cord) Bundles',    path: '/products/star-cord-bundles' },
+    ],
+  },
+  {
+    label: 'Other Products',
+    path: '/products?category=other',
+    children: [
+      { label: 'Pourers', path: '/products?category=pourers' },
+    ],
+  },
+  {
+    label: 'Order Form',
+    path: '/order-form',
+  },
 ];
 
-const staticNavItems = [
-  { label: 'Industries', hash: 'industries' },
-  { label: 'Contact Us', hash: 'contact' },
-];
+// ── DROPDOWN ITEM ─────────────────────────────────────────────────────────────
+function NavDropdownItem({ item, closeAll }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const timerRef = useRef(null);
 
-// Scroll to a section by id, offset for sticky header
-function scrollToId(id, headerHeight) {
-  const target = document.getElementById(id);
-  if (!target) return false;
-  const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 8;
-  window.scrollTo({ top, behavior: 'smooth' });
-  return true;
-}
+  const openMenu  = () => { clearTimeout(timerRef.current); setOpen(true); };
+  const closeMenu = () => { timerRef.current = setTimeout(() => setOpen(false), 120); };
 
-export default function Header() {
-  const [search, setSearch]         = useState('');
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [dropOpen, setDropOpen]     = useState(false);
-  const navigate   = useNavigate();
-  const location   = useLocation();
-
-  const { data } = useCategories();
-  const categories = data?.data?.length ? data.data : FALLBACK_CATEGORIES;
-
-  const dropRef   = useRef(null);
-  const headerRef = useRef(null);
-
-  // Close dropdown on outside click
+  // Close on outside click
   useEffect(() => {
-    function handleClick(e) {
-      if (dropRef.current && !dropRef.current.contains(e.target)) {
-        setDropOpen(false);
-      }
+    function handler(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     }
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  // After navigating back to '/', scroll to the pending hash
-  useEffect(() => {
-    if (location.pathname !== '/') return;
-    const pending = sessionStorage.getItem('scrollTo');
-    if (!pending) return;
-    sessionStorage.removeItem('scrollTo');
-    // Wait for the home page to render
-    const headerHeight = headerRef.current ? headerRef.current.offsetHeight : 0;
-    const attempt = (tries = 0) => {
-      if (scrollToId(pending, headerHeight)) return;
-      if (tries < 15) setTimeout(() => attempt(tries + 1), 80);
-    };
-    setTimeout(() => attempt(), 100);
-  }, [location.pathname]);
+  const handleLinkClick = () => { setOpen(false); closeAll(); };
+
+  return (
+    <li
+      ref={ref}
+      className={`${styles.navItem} ${styles.hasDropdown}`}
+      onMouseEnter={openMenu}
+      onMouseLeave={closeMenu}
+    >
+      {/* Label — clicking the text navigates to the parent path */}
+      <Link
+        to={item.path}
+        className={`${styles.navLink} ${open ? styles.navLinkActive : ''}`}
+        onClick={handleLinkClick}
+      >
+        {item.label}
+        <ChevronDown
+          size={12}
+          className={`${styles.chevron} ${open ? styles.chevronUp : ''}`}
+        />
+      </Link>
+
+      {open && (
+        <ul className={styles.dropdown} role="menu">
+          {item.children.map((child) => (
+            <li key={child.path}>
+              <Link
+                to={child.path}
+                className={styles.dropdownLink}
+                role="menuitem"
+                onClick={handleLinkClick}
+              >
+                {child.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+}
+
+// ── HEADER ────────────────────────────────────────────────────────────────────
+export default function Header() {
+  const [search,     setSearch]     = useState('');
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileExpanded, setMobileExpanded] = useState(null); // tracks which mobile accordion is open
+  const navigate  = useNavigate();
+  const headerRef = useRef(null);
+
+  const closeAll = useCallback(() => setMobileOpen(false), []);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (search.trim()) navigate(`/products?search=${encodeURIComponent(search.trim())}`);
   };
 
-  const handleNavClick = (e, hash) => {
-    e.preventDefault();
-    setMobileOpen(false);
-    setDropOpen(false);
-    const headerHeight = headerRef.current ? headerRef.current.offsetHeight : 0;
-
-    if (location.pathname === '/') {
-      // Already on home — scroll directly
-      scrollToId(hash, headerHeight);
-    } else {
-      // On another page — store hash, navigate home, then scroll via useEffect
-      sessionStorage.setItem('scrollTo', hash);
-      navigate('/');
-    }
-  };
+  const toggleMobileAccordion = (label) =>
+    setMobileExpanded((prev) => (prev === label ? null : label));
 
   return (
     <header ref={headerRef} className={styles.header}>
@@ -93,7 +186,7 @@ export default function Header() {
         <div className={styles.main}>
 
           {/* LOGO */}
-          <Link to="/" className={styles.logo}>
+          <Link to="/" className={styles.logo} onClick={closeAll}>
             <img src="/logo.png" alt="Beneficial Plastics" className={styles.logoImg} />
             <div className={styles.logoText}>
               <strong>BENEFICIAL</strong>
@@ -134,97 +227,94 @@ export default function Header() {
         </div>
       </div>
 
-      {/* NAV */}
-      <nav className={`${styles.nav} ${mobileOpen ? styles.navOpen : ''}`}>
+      {/* ── DESKTOP NAV ── */}
+      <nav className={styles.nav} aria-label="Main navigation">
         <div className="container">
           <div className={styles.navInner}>
             <ul className={styles.navLinks}>
-
-              {/* Home */}
-              <li className={styles.navItem}>
-                <a
-                  href="/"
-                  className={styles.navLink}
-                  onClick={(e) => handleNavClick(e, 'home')}
-                >
-                  Home
-                </a>
-              </li>
-
-              {/* About Us */}
-              <li className={styles.navItem}>
-                <NavLink
-                  to="/about"
-                  className={({ isActive }) =>
-                    `${styles.navLink}${isActive ? ` ${styles.navLinkActive}` : ''}`
-                  }
-                  onClick={() => setMobileOpen(false)}
-                >
-                  About Us
-                </NavLink>
-              </li>
-
-              {/* Products with dropdown */}
-              <li
-                className={`${styles.navItem} ${styles.hasDropdown}`}
-                ref={dropRef}
-                onMouseEnter={() => setDropOpen(true)}
-                onMouseLeave={() => setDropOpen(false)}
-              >
-                <button
-                  className={`${styles.navLink} ${styles.navLinkBtn} ${dropOpen ? styles.navLinkActive : ''}`}
-                  onClick={() => setDropOpen((v) => !v)}
-                  aria-haspopup="true"
-                  aria-expanded={dropOpen}
-                >
-                  Products
-                  <ChevronDown
-                    size={13}
-                    className={`${styles.chevron} ${dropOpen ? styles.chevronUp : ''}`}
-                  />
-                </button>
-
-                {dropOpen && (
-                  <div className={styles.dropdown} role="menu">
-                    {categories.map((cat) => (
-                      <Link
-                        key={cat.slug}
-                        to={`/products?category=${cat.slug}`}
-                        className={styles.dropdownLink}
-                        role="menuitem"
-                        onClick={() => { setDropOpen(false); setMobileOpen(false); }}
-                      >
-                        {cat.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </li>
-
-              {/* Static nav items */}
-              {staticNavItems.map((item) => (
-                <li key={item.label} className={styles.navItem}>
-                  <a
-                    href={`/#${item.hash}`}
-                    className={styles.navLink}
-                    onClick={(e) => handleNavClick(e, item.hash)}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {NAV_ITEMS.map((item) =>
+                item.children ? (
+                  <NavDropdownItem key={item.label} item={item} closeAll={closeAll} />
+                ) : (
+                  <li key={item.label} className={styles.navItem}>
+                    <NavLink
+                      to={item.path}
+                      end={item.path === '/'}
+                      className={({ isActive }) =>
+                        `${styles.navLink}${isActive ? ` ${styles.navLinkActive}` : ''}`
+                      }
+                      onClick={closeAll}
+                    >
+                      {item.label}
+                    </NavLink>
+                  </li>
+                )
+              )}
             </ul>
 
-            <Link to="/request-quote" className={styles.quoteBtn} onClick={() => setMobileOpen(false)}>
+            <Link to="/request-quote" className={styles.quoteBtn} onClick={closeAll}>
               Request Quote
             </Link>
           </div>
         </div>
       </nav>
 
-      {/* Mobile overlay */}
+      {/* ── MOBILE NAV ── */}
       {mobileOpen && (
-        <div className={styles.mobileOverlay} onClick={() => setMobileOpen(false)} />
+        <>
+          <div className={styles.mobileOverlay} onClick={closeAll} />
+          <nav className={styles.mobileNav} aria-label="Mobile navigation">
+            <ul className={styles.mobileNavList}>
+              {NAV_ITEMS.map((item) => (
+                <li key={item.label} className={styles.mobileNavItem}>
+                  {item.children ? (
+                    <>
+                      <button
+                        className={styles.mobileNavBtn}
+                        onClick={() => toggleMobileAccordion(item.label)}
+                        aria-expanded={mobileExpanded === item.label}
+                      >
+                        {item.label}
+                        <ChevronDown
+                          size={14}
+                          className={`${styles.chevron} ${mobileExpanded === item.label ? styles.chevronUp : ''}`}
+                        />
+                      </button>
+                      {mobileExpanded === item.label && (
+                        <ul className={styles.mobileSubList}>
+                          {item.children.map((child) => (
+                            <li key={child.path}>
+                              <Link
+                                to={child.path}
+                                className={styles.mobileSubLink}
+                                onClick={closeAll}
+                              >
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      className={styles.mobileNavLink}
+                      onClick={closeAll}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+              <li>
+                <Link to="/request-quote" className={styles.mobileQuoteBtn} onClick={closeAll}>
+                  Request Quote
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </>
       )}
     </header>
   );
