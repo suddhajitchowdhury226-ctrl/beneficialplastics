@@ -1,85 +1,178 @@
 .page {
-  padding: 48px 0 80px;
+  padding-bottom: 80px;
 }
 
-.hero {
+/* ── PAGE TITLE BAR ── */
+.titleBar {
+  background: var(--blue-pale);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+  margin-bottom: 0;
+}
+
+.pageTitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: -0.3px;
+}
+
+/* ── HERO QUOTE ── */
+.heroQuote {
+  max-width: 820px;
+  margin: 48px auto 40px;
   text-align: center;
-  max-width: 620px;
+}
+
+.heroQuote p {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--black);
+}
+
+.heroQuote strong {
+  color: var(--blue-deep);
+}
+
+/* ── HISTORY ── */
+.history {
+  max-width: 820px;
   margin: 0 auto 48px;
-}
-
-.heroBadge {
-  display: inline-block;
-  background: var(--green-bg);
-  color: var(--green);
-  font-size: 12px;
-  font-weight: 700;
-  padding: 4px 14px;
-  border-radius: 100px;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  margin-bottom: 14px;
-}
-
-.hero h1 {
-  font-size: 32px;
-  font-weight: 900;
-  margin-bottom: 14px;
-  line-height: 1.2;
-}
-
-.hero p {
-  font-size: 15px;
-  color: var(--gray-700);
-  line-height: 1.7;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  text-align: center;
-}
-
-.icon {
-  width: 48px;
-  height: 48px;
-  background: var(--green-bg);
-  border-radius: var(--radius);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--green);
-  margin: 0 auto 14px;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 40px;
 }
 
-.card h3 {
-  font-size: 15px;
+.history p {
+  font-size: 13.5px;
+  color: var(--gray-700);
+  line-height: 1.75;
+}
+
+/* ── TWO-COLUMN ROWS (Mission / Services) ── */
+.twoCol {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0 48px;
+  border-bottom: 1px solid var(--border);
+  padding: 40px 0;
+}
+
+.colLabel {
+  padding-top: 2px;
+}
+
+.colLabel span {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.colContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── MISSION ── */
+.missionIntro {
+  font-size: 13.5px;
+  color: var(--blue-deep);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.bulletList {
+  list-style: disc;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bulletList li {
+  font-size: 13.5px;
+  color: var(--gray-700);
+  line-height: 1.65;
+}
+
+/* ── SERVICES ── */
+.serviceBlock {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.serviceBlock:first-child {
+  padding-top: 0;
+}
+
+.serviceBlock:last-child {
+  border-bottom: none;
+}
+
+.serviceTitle {
+  font-size: 14px;
   font-weight: 700;
+  color: var(--blue-deep);
   margin-bottom: 8px;
 }
 
-.card p {
-  font-size: 13px;
+.serviceBlock p {
+  font-size: 13.5px;
   color: var(--gray-700);
-  line-height: 1.6;
+  line-height: 1.75;
 }
 
+.serviceBlock strong {
+  color: var(--blue-deep);
+  font-weight: 600;
+}
+
+/* ── CTA ── */
+.cta {
+  display: flex;
+  gap: 16px;
+  margin-top: 48px;
+}
+
+/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
+  .heroQuote p {
+    font-size: 20px;
+  }
+
+  .twoCol {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .colLabel {
+    padding-top: 0;
+  }
+
+  .colLabel span {
+    display: block;
+    margin-bottom: 4px;
   }
 }
 
 @media (max-width: 480px) {
-  .grid {
-    grid-template-columns: 1fr;
+  .heroQuote p {
+    font-size: 17px;
+  }
+
+  .cta {
+    flex-direction: column;
+  }
+
+  .cta a {
+    width: 100%;
+    justify-content: center;
   }
 }

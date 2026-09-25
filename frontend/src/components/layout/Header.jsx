@@ -1,4 +1,4 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import { Sparkles, Phone, User, ShoppingCart, Menu, ChevronDown, X } from 'lucide-react';
 import { useCategories } from '../../hooks/useCategories';
@@ -14,7 +14,6 @@ const FALLBACK_CATEGORIES = [
 ];
 
 const staticNavItems = [
-  { label: 'About Us',   hash: 'about' },
   { label: 'Industries', hash: 'industries' },
   { label: 'Contact Us', hash: 'contact' },
 ];
@@ -150,6 +149,19 @@ export default function Header() {
                 >
                   Home
                 </a>
+              </li>
+
+              {/* About Us */}
+              <li className={styles.navItem}>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    `${styles.navLink}${isActive ? ` ${styles.navLinkActive}` : ''}`
+                  }
+                  onClick={() => setMobileOpen(false)}
+                >
+                  About Us
+                </NavLink>
               </li>
 
               {/* Products with dropdown */}
