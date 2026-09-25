@@ -1,0 +1,298 @@
+/* ── PAGE SHELL ── */
+.page {
+  padding: 40px 0 80px;
+  background: var(--white);
+}
+
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--gray-500);
+  margin-bottom: 24px;
+}
+
+.breadcrumb a {
+  color: var(--blue-deep);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* ── HERO ── */
+.heroSection {
+  margin-bottom: 36px;
+}
+
+.pageTitle {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: -0.4px;
+  margin-bottom: 6px;
+}
+
+.heroSub {
+  font-size: 13.5px;
+  color: var(--blue-deep);
+  font-weight: 600;
+}
+
+/* ── PRINTER SHOWCASE ── */
+.showcase {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  margin-bottom: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.showcaseImg {
+  flex: 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--gray-100);
+  border: 1px solid var(--border);
+  max-width: 300px;
+}
+
+.showcaseImg img {
+  width: 100%;
+  height: 240px;
+  object-fit: contain;
+  display: block;
+  padding: 12px;
+  transition: transform 0.3s ease;
+}
+
+.showcaseImg img:hover {
+  transform: scale(1.04);
+}
+
+.showcaseRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 300px;
+}
+
+.showcaseLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue-deep);
+  text-align: center;
+}
+
+/* ── KEY BENEFITS ── */
+.benefits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+  padding: 28px;
+  background: var(--blue-pale);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.benefitItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.benefitTitle {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--black);
+}
+
+.benefitDesc {
+  font-size: 13.5px;
+  color: var(--gray-700);
+  line-height: 1.75;
+}
+
+/* ── ABOUT THIS PRINTER ── */
+.aboutSection {
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
+}
+
+.bulletList {
+  list-style: disc;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.bulletList li {
+  font-size: 13.5px;
+  color: var(--gray-700);
+  line-height: 1.7;
+}
+
+/* ── MATERIALS SECTION ── */
+.materialsSection {
+  margin-bottom: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sectionTitleAlt {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+
+.materialsDesc {
+  font-size: 13.5px;
+  color: var(--gray-700);
+  line-height: 1.8;
+  max-width: 800px;
+}
+
+/* ── 3D FILAMENT PRINTING ── */
+.filamentSection {
+  margin-bottom: 48px;
+}
+
+.filamentTitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 28px;
+  letter-spacing: -0.3px;
+}
+
+.filamentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Left — machine images */
+.filamentImages {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filamentImgWrap {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--gray-100);
+  border: 1px solid var(--border);
+}
+
+.filamentImgWrap img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  display: block;
+  padding: 12px;
+  transition: transform 0.3s ease;
+}
+
+.filamentImgWrap img:hover {
+  transform: scale(1.03);
+}
+
+/* Right — materials */
+.filamentMaterials {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.materialsLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue-deep);
+}
+
+.materialsImgWrap {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--gray-100);
+  border: 1px solid var(--border);
+}
+
+.materialsImgWrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  padding: 12px;
+  object-fit: contain;
+}
+
+.materialsNote {
+  font-size: 13px;
+  color: var(--gray-700);
+  line-height: 1.75;
+}
+
+/* ── CTA ── */
+.cta {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .showcase {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .showcaseImg,
+  .showcaseRight {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .filamentGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta {
+    flex-direction: column;
+  }
+
+  .cta a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pageTitle {
+    font-size: 22px;
+  }
+}

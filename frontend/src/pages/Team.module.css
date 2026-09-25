@@ -1,0 +1,90 @@
+.page {
+  padding: 48px 0 80px;
+  background: var(--white);
+}
+
+/* ── PAGE HEADING ── */
+.heading {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 32px;
+  letter-spacing: -0.2px;
+}
+
+/* ── CARDS LIST ── */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── INDIVIDUAL CARD ── */
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: var(--gray-100);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  max-width: 520px;           /* matches the reference width */
+}
+
+/* ── PHOTO ── */
+.imgWrap {
+  flex-shrink: 0;
+  width: 72px;
+  height: 84px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--border);
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* ── TEXT ── */
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.name {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--black);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+}
+
+.divider {
+  font-weight: 400;
+  color: var(--gray-500);
+}
+
+.bio {
+  font-size: 13px;
+  color: var(--gray-700);
+  line-height: 1.7;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 480px) {
+  .card {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .imgWrap {
+    width: 80px;
+    height: 92px;
+  }
+}

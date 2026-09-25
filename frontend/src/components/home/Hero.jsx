@@ -4,7 +4,7 @@ import styles from './Hero.module.css';
 
 const SLIDES = [
   {
-    bg: '/hero-image.png',
+    bg: '/hero-team.png',
     bgPosition: 'center center',
     bgSize: 'cover',
     bgFilter: 'none',
